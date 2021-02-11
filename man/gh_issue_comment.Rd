@@ -4,10 +4,10 @@
 \alias{gh_issue_comment}
 \title{Comment on a Github issue}
 \usage{
-gh_issue_comment(path, issue_number, body)
+gh_issue_comment(path, issue_number, body, ...)
 }
 \arguments{
-\item{body}{}
+\item{...}{}
 }
 \value{
 

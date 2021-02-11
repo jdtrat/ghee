@@ -4,10 +4,10 @@
 \alias{gh_issue_assign}
 \title{Assign people to a Github issue}
 \usage{
-gh_issue_assign(path, issue_number, assignees)
+gh_issue_assign(path, issue_number, assignees, ...)
 }
 \arguments{
-\item{assignees}{}
+\item{...}{}
 }
 \description{
 Assign people to a Github issue

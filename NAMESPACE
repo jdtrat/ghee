@@ -2,6 +2,7 @@
 
 export(gh_collab_check)
 export(gh_collab_invite)
+export(gh_issue_assign)
 export(gh_issue_comment)
 export(gh_issue_list)
 export(gh_issue_mention)

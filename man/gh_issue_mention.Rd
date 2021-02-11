@@ -4,10 +4,10 @@
 \alias{gh_issue_mention}
 \title{Check to see if a person was mentioned in a GitHub issue}
 \usage{
-gh_issue_mention(path, collaborator)
+gh_issue_mention(path, collaborator, ...)
 }
 \arguments{
-\item{collaborator}{}
+\item{...}{}
 }
 \value{
 TRUE if the collaborator was mentioned in any issues; FALSE otherwise

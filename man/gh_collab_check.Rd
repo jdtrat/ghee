@@ -4,10 +4,10 @@
 \alias{gh_collab_check}
 \title{Check if a user is a collaborator}
 \usage{
-gh_collab_check(path, collaborator, messages = TRUE)
+gh_collab_check(path, collaborator, ..., messages = TRUE)
 }
 \arguments{
-\item{messages}{}
+\item{...}{}
 }
 \value{
 

@@ -4,10 +4,10 @@
 \alias{gh_check_assignable}
 \title{Check that a person can be assigned to an issue}
 \usage{
-gh_check_assignable(path, assignee, messages = TRUE)
+gh_check_assignable(path, assignee, ..., messages = TRUE)
 }
 \arguments{
-\item{assignee}{}
+\item{messages}{}
 }
 \description{
 Check that a person can be assigned to an issue
