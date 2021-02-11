@@ -21,7 +21,7 @@ check_path <- function(path) {
 #' @param assignee
 #'
 #' @keywords internal
-gh_check_assignable <- function(path, assignee, messages = TRUE) {
+gh_check_assignable <- function(path, assignee, ..., messages = TRUE) {
 
   path <- check_path(path = path)
 
@@ -31,7 +31,8 @@ gh_check_assignable <- function(path, assignee, messages = TRUE) {
         tryCatch(gh::gh("GET /repos/{owner}/{repo}/assignees/{assignee}",
                         owner = path[1],
                         repo = path[2],
-                        assignee = assignee),
+                        assignee = assignee,
+                        ...),
                  error = function(c) FALSE))) {FALSE} else {TRUE}
 
   if (messages) {

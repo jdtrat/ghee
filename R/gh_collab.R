@@ -24,12 +24,13 @@ gh_collab_invite <- function(path, invitee, ...) {
 #' @param path
 #' @param collaborator
 #' @param messages
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-gh_collab_check <- function(path, collaborator, messages = TRUE) {
+gh_collab_check <- function(path, collaborator, ..., messages = TRUE) {
 
   if (missing(collaborator)) stop("Must supply user collaborator to check for.")
   path <- check_path(path = path)
@@ -40,7 +41,8 @@ gh_collab_check <- function(path, collaborator, messages = TRUE) {
         tryCatch(gh::gh("GET /repos/{owner}/{repo}/collaborators/{username}",
                         owner = path[1],
                         repo = path[2],
-                        username = collaborator),
+                        username = collaborator,
+                        ...),
                  error = function(c) FALSE))) {FALSE} else {TRUE}
 
   if (messages) {

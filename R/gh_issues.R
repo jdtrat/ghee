@@ -55,12 +55,13 @@ gh_issue_list <- function(path, ...) {
 #' @param path
 #' @param issue_number
 #' @param body
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-gh_issue_comment <- function(path, issue_number, body) {
+gh_issue_comment <- function(path, issue_number, body, ...) {
   path <- check_path(path = path)
 
   invisible(
@@ -68,7 +69,8 @@ gh_issue_comment <- function(path, issue_number, body) {
            owner = path[1],
            repo = path[2],
            issue_number = issue_number,
-           body = body)
+           body = body,
+           ...)
   )
 }
 
@@ -77,13 +79,14 @@ gh_issue_comment <- function(path, issue_number, body) {
 #'
 #' @param path
 #' @param collaborator
+#' @param ...
 #'
 #' @return TRUE if the collaborator was mentioned in any issues; FALSE otherwise
 #' @export
 #'
-gh_issue_mention <- function(path, collaborator) {
+gh_issue_mention <- function(path, collaborator, ...) {
 
-  list_issues <- gh_issue_list(path, mentioned = collaborator)
+  list_issues <- gh_issue_list(path, mentioned = collaborator, ...)
 
   if (length(list_issues) == 0) {
     FALSE
@@ -98,13 +101,15 @@ gh_issue_mention <- function(path, collaborator) {
 #' @param path
 #' @param issue_number
 #' @param assignees
+#' @param ...
 #'
-gh_issue_assign <- function(path, issue_number, assignees) {
+gh_issue_assign <- function(path, issue_number, assignees, ...) {
 
   assignable <- vapply(assignees,
                        gh_check_assignable,
                        path = path,
                        messages = FALSE,
+                       ...,
                        FUN.VALUE = logical(1))
 
   path <- check_path(path = path)
@@ -116,7 +121,8 @@ gh_issue_assign <- function(path, issue_number, assignees) {
              owner = path[1],
              repo = path[2],
              issue_number = issue_number,
-             assignees = assignees)
+             assignees = assignees,
+             ...)
     )
   } else {
     stop("One of the assignees does not have access to the repo.")
