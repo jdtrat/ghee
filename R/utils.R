@@ -12,13 +12,12 @@ check_path <- function(path) {
   }
 }
 
-
-
-
 #' Check that a person can be assigned to an issue
 #'
 #' @param path
 #' @param assignee
+#' @param ...
+#' @param messages
 #'
 #' @keywords internal
 gh_check_assignable <- function(path, assignee, ..., messages = TRUE) {

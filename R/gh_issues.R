@@ -103,6 +103,8 @@ gh_issue_mention <- function(path, collaborator, ...) {
 #' @param assignees
 #' @param ...
 #'
+#' @export
+#'
 gh_issue_assign <- function(path, issue_number, assignees, ...) {
 
   assignable <- vapply(assignees,
