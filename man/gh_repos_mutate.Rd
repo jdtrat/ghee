@@ -23,30 +23,30 @@ change the repository's name, privacy settings, and more.
 \dontrun{
 
 # Create a Private Repo
-gh_repos_create(path = "jdtrat/simplegit_test", private = TRUE, description = "A test repository.")
+gh_repos_create(path = "jdtrat/ghee_test", private = TRUE, description = "A test repository.")
 
 # Disable Issues
-gh_repos_mutate(path = "jdtrat/simplegit_test", has_issues = FALSE)
+gh_repos_mutate(path = "jdtrat/ghee_test", has_issues = FALSE)
 
 # Update Description
-gh_repos_mutate(path = "jdtrat/simplegit_test", description = "A test repository for {simplegit}.")
+gh_repos_mutate(path = "jdtrat/ghee_test", description = "A test repository for {ghee}.")
 
 # Remove Description
 gh_repos_mutate("jdtrat/friend", description = NA)
 
 # Change Privacy Settings
-gh_repos_mutate(path = "jdtrat/simplegit_test", private = FALSE)
+gh_repos_mutate(path = "jdtrat/ghee_test", private = FALSE)
 
 # Change Repo Name
-gh_repos_mutate(path = "jdtrat/simplegit_test", name = "simplegit_testing")
+gh_repos_mutate(path = "jdtrat/ghee_test", name = "ghee_testing")
 
 # Change Repo Name Back
 # Note the path argument reflects the name change
-gh_repos_mutate(path = "jdtrat/simplegit_testing", name = "simplegit_test")
+gh_repos_mutate(path = "jdtrat/ghee_testing", name = "ghee_test")
 
 # Delete Repo
 # Note this requires a special GitHub Token and should be used with caution.
-gh_repos_delete("jdtrat/simplegit_test")
+gh_repos_delete("jdtrat/ghee_test")
 
 }
 

@@ -1,4 +1,4 @@
-Package: simplegit
+Package: ghee
 Title: Provides a lightweight interface for 'GitHub' through R
 Version: 0.0.0.9000
 Authors@R: 
@@ -16,8 +16,8 @@ Language: es
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
-URL: https://github.com/jdtrat/simplegit
-BugReports: https://github.com/jdtrat/simplegit/issues
+URL: https://github.com/jdtrat/ghee
+BugReports: https://github.com/jdtrat/ghee/issues
 Imports: 
     gh,
     jsonlite,
