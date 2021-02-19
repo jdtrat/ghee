@@ -22,8 +22,6 @@ gh_issue_new <- function(path, title, body, ...) {
   )
 }
 
-
-
 #' List issues for a Github Repo
 #'
 #' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
@@ -127,7 +125,7 @@ gh_issue_assign <- function(path, issue_number, assignees, ...) {
              ...)
     )
   } else {
-    stop("One of the assignees does not have access to the repo.")
+    stop("At least one of the assignees does not have access to the repo.")
   }
 }
 
