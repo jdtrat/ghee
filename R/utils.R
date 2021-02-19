@@ -1,28 +1,30 @@
 #' Check github path
 #'
-#' @param path
+#' @param .path GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.
 #' @keywords internal
 #'
-check_path <- function(path) {
+#' @return The GitHub repo path
+#'
+check_path <- function(.path) {
 
-  if(missing(path)) {
+  if(missing(.path)) {
     as.character(gh::gh_tree_remote())
   } else {
-    unlist(strsplit(path, split = "/"))
+    unlist(strsplit(.path, split = "/"))
   }
 }
 
 #' Check that a person can be assigned to an issue
 #'
-#' @param path
-#' @param assignee
-#' @param ...
-#' @param messages
+#' @inheritParams gh_collab_invite
 #'
 #' @keywords internal
+#'
+#' @return TRUE/FALSE if a collaborator is assignable
+#'
 gh_check_assignable <- function(path, assignee, ..., messages = TRUE) {
 
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   result <-
     if (
