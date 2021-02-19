@@ -1,16 +1,19 @@
 
 #' Create an issue on a github repo
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
+#' @param path GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.
 #' @param title The issue's title
 #' @param body The issue's body text
-#' @param ... Additional parameters, see https://docs.github.com/en/rest/reference/issues#create-an-issue
+#' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
 #' @export
 #'
 gh_issue_new <- function(path, title, body, ...) {
 
-  path <- check_path(path = path)
+  # For subsetting the issues later
+  issue_title <- title
+
+  path <- check_path(path)
 
   invisible(
     gh::gh("POST /repos/{owner}/{repo}/issues",
@@ -20,20 +23,30 @@ gh_issue_new <- function(path, title, body, ...) {
            body = body,
            ...)
   )
+
+  issues <- gh_issue_list(path = paste0(path[1], "/", path[2]),
+                          ...)
+
+  new_issue_link <- tryCatch(
+    subset(issues, title == issue_title)$html_url[[1]],
+    error = function(c) stop("hmm...the issue wasn't created. Maybe check your token permissions?")
+  )
+
+
+  message(paste0("Issue created at ", path[1], "/", path[2], " and can be viewed here: \n", new_issue_link))
+
 }
 
-#' List issues for a Github Repo
+#' List issues for a GitHub Repo
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
-#' @param ... Additional parameters, see https://docs.github.com/en/rest/reference/issues#list-repository-issues
+#' @inheritParams gh_issue_new
 #'
-#' @return
+#' @return A list of issues for the specified GitHub repo
 #' @export
 #'
-#' @examples
 gh_issue_list <- function(path, ...) {
 
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   issues <- gh::gh("GET /repos/{owner}/{repo}/issues",
                    owner = path[1],
@@ -48,19 +61,17 @@ gh_issue_list <- function(path, ...) {
 
 }
 
-#' Comment on a Github issue
+#' Comment on a GitHub issue
 #'
-#' @param path
-#' @param issue_number
-#' @param body
-#' @param ...
+#' @inheritParams gh_issue_new
+#' @param issue_number The issue number on which to comment. Can be determined online or with \code{\link{gh_issue_list}}
 #'
-#' @return
+#' @return NA; called for side effects.
+#'
 #' @export
 #'
-#' @examples
 gh_issue_comment <- function(path, issue_number, body, ...) {
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   invisible(
     gh::gh("POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
@@ -75,16 +86,14 @@ gh_issue_comment <- function(path, issue_number, body, ...) {
 
 #' Check to see if a person was mentioned in a GitHub issue
 #'
-#' @param path
-#' @param collaborator
-#' @param ...
+#' @inheritParams gh_collab_invite
 #'
 #' @return TRUE if the collaborator was mentioned in any issues; FALSE otherwise
 #' @export
 #'
 gh_issue_mention <- function(path, collaborator, ...) {
 
-  list_issues <- gh_issue_list(path, mentioned = collaborator, ...)
+  list_issues <- gh_issue_list(path = path, mentioned = collaborator, ...)
 
   if (length(list_issues) == 0) {
     FALSE
@@ -94,38 +103,33 @@ gh_issue_mention <- function(path, collaborator, ...) {
 
 }
 
-#' Assign people to a Github issue
+#' Assign people to a GitHub issue
 #'
-#' @param path
-#' @param issue_number
-#' @param assignees
-#' @param ...
+#' @inheritParams gh_collab_invite
+#' @inheritParams gh_issue_comment
 #'
+#' @return NA; called for side effects
 #' @export
 #'
-gh_issue_assign <- function(path, issue_number, assignees, ...) {
+gh_issue_assign <- function(path, issue_number, collaborator, ...) {
 
-  assignable <- vapply(assignees,
-                       gh_check_assignable,
-                       path = path,
-                       messages = FALSE,
-                       ...,
-                       FUN.VALUE = logical(1))
 
-  path <- check_path(path = path)
+  assignable <- gh_check_assignable(path = path, assignee = collaborator, messages = FALSE)
 
-  if (all(assignable)) {
+  path <- check_path(path)
+
+  if (assignable) {
 
     invisible(
       gh::gh("POST /repos/{owner}/{repo}/issues/{issue_number}/assignees",
              owner = path[1],
              repo = path[2],
              issue_number = issue_number,
-             assignees = assignees,
+             assignees = collaborator,
              ...)
     )
   } else {
-    stop("At least one of the assignees does not have access to the repo.")
+    stop(paste0("Sorry, but ", collaborator, " does not have access to the ", path[2], " repo."))
   }
 }
 
