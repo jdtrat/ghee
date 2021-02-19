@@ -1,18 +1,20 @@
 
 #' Create a new repository
 #'
-#' @param name Name of the repository.
+#' @param path Github repo path of the form "{username}/{repo}".
 #' @param private Will this repository be private? TRUE/FALSE; default is TRUE.
 #' @param description A short description of the repository.
 #' @param ... Any other parameters (https://docs.github.com/en/rest/reference/repos#create-a-repository-for-the-authenticated-user)
 #'
 #' @export
 #'
-gh_repos_create <- function(name, private = TRUE, description = NULL, ...) {
+gh_repos_create <- function(path, private = TRUE, description = NULL, ...) {
+
+  path <- check_path(path = path)
 
   invisible(
     gh::gh("POST /user/repos",
-         name = name,
+         name = path[2],
          private = private,
          description = NULL,
          ...)
@@ -89,12 +91,48 @@ gh_repos_delete <- function(path, ...) {
          cat(paste0("Your wish is my command. The ", path[2], " repository was not deleted.")))
 }
 
-#' Change repository settings
+#' Change repository features
+#'
+#' This function allows you to update a repository's features. You can easily
+#' change the repository's name, privacy settings, and more.
 #'
 #' @param path Github repo path of the form "{username}/{repo}".
-#' @param ... Any of the options here https://docs.github.com/en/rest/reference/repos#update-a-repository
+#' @param ... Any of the options here
+#'   https://docs.github.com/en/rest/reference/repos#update-a-repository
 #'
 #' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' # Create a Private Repo
+#' gh_repos_create(path = "jdtrat/simplegit_test", private = TRUE, description = "A test repository.")
+#'
+#' # Disable Issues
+#' gh_repos_mutate(path = "jdtrat/simplegit_test", has_issues = FALSE)
+#'
+#' # Update Description
+#' gh_repos_mutate(path = "jdtrat/simplegit_test", description = "A test repository for {simplegit}.")
+#'
+#' # Remove Description
+#' gh_repos_mutate("jdtrat/friend", description = NA)
+#'
+#' # Change Privacy Settings
+#' gh_repos_mutate(path = "jdtrat/simplegit_test", private = FALSE)
+#'
+#' # Change Repo Name
+#' gh_repos_mutate(path = "jdtrat/simplegit_test", name = "simplegit_testing")
+#'
+#' # Change Repo Name Back
+#' # Note the path argument reflects the name change
+#' gh_repos_mutate(path = "jdtrat/simplegit_testing", name = "simplegit_test")
+#'
+#' # Delete Repo
+#' # Note this requires a special GitHub Token and should be used with caution.
+#' gh_repos_delete("jdtrat/simplegit_test")
+#'
+#' }
 #'
 #'
 gh_repos_mutate <- function(path, ...) {
