@@ -1,40 +1,37 @@
-#' Invite a collaborator to a Github repo
+#' Invite a collaborator to a GitHub repo
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
-#' @param invitee The person to invite.
-#' @param ... Additional parameters, see https://docs.github.com/rest/reference/repos#add-a-repository-collaborator
+#' @param path GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.
+#' @param collaborator The collaborator for whom to call this function.
+#' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
 #' @export
 
-gh_collab_invite <- function(path, invitee, ...) {
+gh_collab_invite <- function(path, collaborator, ...) {
 
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   invisible(
     gh::gh("PUT /repos/{owner}/{repo}/collaborators/{username}",
            owner = path[1],
            repo = path[2],
-           username = invitee,
+           username = collaborator,
            ...)
   )
 }
 
-#' Uninvite a collaborator to a Github repo
+#' Uninvite a collaborator to a GitHub repo
 #'
 #' This only works if the individual's invite is pending.
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
-#' @param uninvitee The person to uninvite.
-#' @param ... Additional parameters, see https://docs.github.com/rest/reference/repos#add-a-repository-collaborator
+#' @inheritParams gh_collab_invite
+#'
+#' @return NA; called for side effects.
 #'
 #' @export
 
-gh_collab_uninvite <- function(path, uninvitee, ...) {
+gh_collab_uninvite <- function(path, collaborator, ...) {
 
-  #substitute the uninvitee for delayed evaluation
-  uninvitee <- substitute(uninvitee)
-
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   # list the pending invites
   pending <- gh::gh("GET /repos/{owner}/{repo}/invitations",
@@ -48,7 +45,7 @@ gh_collab_uninvite <- function(path, uninvitee, ...) {
   users <- data.frame(usernames = do.call(rbind, data.frame(do.call(rbind, lapply(pending, "[[", "invitee")))$login))
   #overwrite pending with just the relevant info
   pending <- cbind(ids, users)
-  invite_id <- subset(pending, usernames == eval(uninvitee, envir = pending))$ids
+  invite_id <- pending[pending$usernames == collaborator, "ids"]
 
   invisible(
     gh::gh("DELETE /repos/{owner}/{repo}/invitations/{invitation_id}",
@@ -56,24 +53,23 @@ gh_collab_uninvite <- function(path, uninvitee, ...) {
            repo = path[2],
            invitation_id = invite_id)
   )
+
 }
 
 
 #' Check if a user is a collaborator
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
-#' @param collaborator Github username to check if they are a collaborator
-#' @param messages
-#' @param ...
 #'
-#' @return
+#' @inheritParams gh_collab_invite
+#' @param messages Logical: Should a message indicating the status of the function be printed? TRUE by default.
+#'
+#' @return TRUE if the individual is a collaborator on the repo; FALSE otherwise.
 #' @export
 #'
-#' @examples
 gh_collab_check <- function(path, collaborator, ..., messages = TRUE) {
 
   if (missing(collaborator)) stop("Must supply user collaborator to check for.")
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   result <-
     if (
@@ -99,15 +95,14 @@ gh_collab_check <- function(path, collaborator, ..., messages = TRUE) {
 
 #' List pending invitations for a repo
 #'
-#' @param path Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.
-#' @param ... Additional parameters, see GitHub API
+#' @inheritParams gh_collab_invite
 #'
 #' @return A dataframe listing the usernames of pending invitees (or dataframe of length 0 if no pending invitees).
 #' @export
 #'
-gh_collab_pending_invites <- function(path, ...) {
+gh_collab_pending <- function(path, ...) {
 
-  path <- check_path(path = path)
+  path <- check_path(path)
 
   pending <- gh::gh("GET /repos/{owner}/{repo}/invitations",
                     owner = path[1],
@@ -125,3 +120,30 @@ gh_collab_pending_invites <- function(path, ...) {
 
 }
 
+#' Remove a collaborator from a repository
+#'
+#' This will remove a collaborator from a repository and confirm the individual is no longer a member.
+#'
+#' @inheritParams gh_collab_invite
+#' @param messages Logical: Should a message indicating the status of the function be printed? TRUE by default.
+#'
+#' @return NA; called for its side effects.
+#' @export
+#'
+gh_collab_remove <- function(path, collaborator, ..., messages = TRUE) {
+
+  path <- check_path(path)
+
+  invisible(
+    gh::gh("DELETE /repos/{owner}/{repo}/collaborators/{username}",
+           owner = path[1],
+           repo = path[2],
+           username = collaborator,
+           ...)
+  )
+
+  if (gh_collab_check(path = path, collaborator = collaborator, ..., messages = messages)) {
+    stop(paste0("hmm...", collaborator, " is still a collaborator. Maybe check your token permissions?"))
+  }
+
+}
