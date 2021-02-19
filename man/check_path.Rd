@@ -4,7 +4,13 @@
 \alias{check_path}
 \title{Check github path}
 \usage{
-check_path(path)
+check_path(.path)
+}
+\arguments{
+\item{.path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+}
+\value{
+The GitHub repo path
 }
 \description{
 Check github path

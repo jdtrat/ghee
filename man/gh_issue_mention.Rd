@@ -7,7 +7,11 @@
 gh_issue_mention(path, collaborator, ...)
 }
 \arguments{
-\item{...}{}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+
+\item{collaborator}{The collaborator for whom to call this function.}
+
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
 TRUE if the collaborator was mentioned in any issues; FALSE otherwise

@@ -2,18 +2,18 @@
 % Please edit documentation in R/gh_issues.R
 \name{gh_issue_list}
 \alias{gh_issue_list}
-\title{List issues for a Github Repo}
+\title{List issues for a GitHub Repo}
 \usage{
 gh_issue_list(path, ...)
 }
 \arguments{
-\item{path}{Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
 
-\item{...}{Additional parameters, see https://docs.github.com/en/rest/reference/issues#list-repository-issues}
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
-
+A list of issues for the specified GitHub repo
 }
 \description{
-List issues for a Github Repo
+List issues for a GitHub Repo
 }

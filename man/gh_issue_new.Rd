@@ -7,13 +7,13 @@
 gh_issue_new(path, title, body, ...)
 }
 \arguments{
-\item{path}{Github repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
 
 \item{title}{The issue's title}
 
 \item{body}{The issue's body text}
 
-\item{...}{Additional parameters, see https://docs.github.com/en/rest/reference/issues#create-an-issue}
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \description{
 Create an issue on a github repo

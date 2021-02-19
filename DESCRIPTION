@@ -1,5 +1,5 @@
 Package: simplegit
-Title: Provides a lightweight interface for Github through R
+Title: Provides a lightweight interface for 'GitHub' through R
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Jonathan",
@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jdt@jdtrat.com",
            comment = c(ORCID = "0000-0002-1097-7603"))
-Description: What the package does (one paragraph).
+Description: Provides a user friendly wrapper for the 'gh' package facilitating easy
+  access to the REST API for 'GitHub'. Includes support for common tasks such as 
+  creating and commenting on issues, inviting collaborators, and more.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: es
@@ -18,4 +20,5 @@ URL: https://github.com/jdtrat/simplegit
 BugReports: https://github.com/jdtrat/simplegit/issues
 Imports: 
     gh,
-    jsonlite
+    jsonlite,
+    utils

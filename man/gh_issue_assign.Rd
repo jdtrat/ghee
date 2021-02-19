@@ -2,13 +2,22 @@
 % Please edit documentation in R/gh_issues.R
 \name{gh_issue_assign}
 \alias{gh_issue_assign}
-\title{Assign people to a Github issue}
+\title{Assign people to a GitHub issue}
 \usage{
-gh_issue_assign(path, issue_number, assignees, ...)
+gh_issue_assign(path, issue_number, collaborator, ...)
 }
 \arguments{
-\item{...}{}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+
+\item{issue_number}{The issue number on which to comment. Can be determined online or with \code{\link{gh_issue_list}}}
+
+\item{collaborator}{The collaborator for whom to call this function.}
+
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
+}
+\value{
+NA; called for side effects
 }
 \description{
-Assign people to a Github issue
+Assign people to a GitHub issue
 }

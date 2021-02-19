@@ -7,7 +7,12 @@
 gh_check_assignable(path, assignee, ..., messages = TRUE)
 }
 \arguments{
-\item{messages}{}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
+}
+\value{
+TRUE/FALSE if a collaborator is assignable
 }
 \description{
 Check that a person can be assigned to an issue

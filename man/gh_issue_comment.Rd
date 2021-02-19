@@ -2,16 +2,22 @@
 % Please edit documentation in R/gh_issues.R
 \name{gh_issue_comment}
 \alias{gh_issue_comment}
-\title{Comment on a Github issue}
+\title{Comment on a GitHub issue}
 \usage{
 gh_issue_comment(path, issue_number, body, ...)
 }
 \arguments{
-\item{...}{}
+\item{path}{GitHub repo path of the form "{username}/{repo}". If not provided, will default to current repo.}
+
+\item{issue_number}{The issue number on which to comment. Can be determined online or with \code{\link{gh_issue_list}}}
+
+\item{body}{The issue's body text}
+
+\item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
-
+NA; called for side effects.
 }
 \description{
-Comment on a Github issue
+Comment on a GitHub issue
 }
