@@ -5,6 +5,7 @@
 #' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
 #' @export
+#' @family Collaborations
 
 gh_collab_invite <- function(path, collaborator, ...) {
 
@@ -28,6 +29,7 @@ gh_collab_invite <- function(path, collaborator, ...) {
 #' @return NA; called for side effects.
 #'
 #' @export
+#' @family Collaborations
 
 gh_collab_uninvite <- function(path, collaborator, ...) {
 
@@ -56,15 +58,44 @@ gh_collab_uninvite <- function(path, collaborator, ...) {
 
 }
 
+#' List pending invitations for a repo
+#'
+#' @inheritParams gh_collab_invite
+#'
+#' @return A dataframe listing the usernames of pending invitees (or dataframe of length 0 if no pending invitees).
+#' @export
+#' @family Collaborations
+#'
+gh_collab_pending <- function(path, ...) {
+
+  path <- check_path(path)
+
+  pending <- gh::gh("GET /repos/{owner}/{repo}/invitations",
+                    owner = path[1],
+                    repo = path[2],
+                    ...)
+
+  if (length(pending) == 0) {
+    output <- data.frame(usernames = NULL)
+  } else {
+    output <- data.frame(usernames = do.call(rbind, data.frame(do.call(rbind, lapply(pending, "[[", "invitee")))$login))
+    rownames(output) <- NULL
+  }
+
+  return(output)
+
+}
 
 #' Check if a user is a collaborator
-#'
 #'
 #' @inheritParams gh_collab_invite
 #' @param messages Logical: Should a message indicating the status of the function be printed? TRUE by default.
 #'
 #' @return TRUE if the individual is a collaborator on the repo; FALSE otherwise.
+#'
+#' @seealso [gh_collab_list()] for listing all current repository collaborators.
 #' @export
+#' @family Collaborations
 #'
 gh_collab_check <- function(path, collaborator, ..., messages = TRUE) {
 
@@ -93,28 +124,29 @@ gh_collab_check <- function(path, collaborator, ..., messages = TRUE) {
 
 }
 
-#' List pending invitations for a repo
+#' List current collaborators for a GitHub repo
 #'
 #' @inheritParams gh_collab_invite
 #'
-#' @return A dataframe listing the usernames of pending invitees (or dataframe of length 0 if no pending invitees).
+#' @return A data frame that contains the collaborators for the specified repository.
+#'
 #' @export
 #'
-gh_collab_pending <- function(path, ...) {
+#' @seealso [gh_collab_check()] for checking whether a specific user is a collaborator.
+#' @family Collaborations
+#'
+gh_collab_list <- function(path, ...) {
 
   path <- check_path(path)
 
-  pending <- gh::gh("GET /repos/{owner}/{repo}/invitations",
-                    owner = path[1],
-                    repo = path[2],
-                    ...)
+  collaborators <- gh::gh("GET /repos/{owner}/{repo}/collaborators",
+                          owner = path[1],
+                          repo = path[2],
+                          ...)
 
-  if (length(pending) == 0) {
-    output <- data.frame(usernames = NULL)
-  } else {
-    output <- data.frame(usernames = do.call(rbind, data.frame(do.call(rbind, lapply(pending, "[[", "invitee")))$login))
-    rownames(output) <- NULL
-  }
+  output <- as.data.frame(do.call(rbind, lapply(collaborators, "[[", "login")))
+  names(output) <- "collaborators"
+  rownames(output) <- NULL
 
   return(output)
 
@@ -129,6 +161,7 @@ gh_collab_pending <- function(path, ...) {
 #'
 #' @return NA; called for its side effects.
 #' @export
+#' @family Collaborations
 #'
 gh_collab_remove <- function(path, collaborator, ..., messages = TRUE) {
 

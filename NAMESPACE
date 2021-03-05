@@ -2,6 +2,7 @@
 
 export(gh_collab_check)
 export(gh_collab_invite)
+export(gh_collab_list)
 export(gh_collab_pending)
 export(gh_collab_remove)
 export(gh_collab_uninvite)
