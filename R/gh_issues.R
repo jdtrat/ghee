@@ -7,6 +7,7 @@
 #' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
 #' @export
+#' @family Issues
 #'
 gh_issue_new <- function(path, title, body, ...) {
 
@@ -43,6 +44,7 @@ gh_issue_new <- function(path, title, body, ...) {
 #'
 #' @return A list of issues for the specified GitHub repo
 #' @export
+#' @family Issues
 #'
 gh_issue_list <- function(path, ...) {
 
@@ -69,6 +71,7 @@ gh_issue_list <- function(path, ...) {
 #' @return NA; called for side effects.
 #'
 #' @export
+#' @family Issues
 #'
 gh_issue_comment <- function(path, issue_number, body, ...) {
   path <- check_path(path)
@@ -90,6 +93,7 @@ gh_issue_comment <- function(path, issue_number, body, ...) {
 #'
 #' @return TRUE if the collaborator was mentioned in any issues; FALSE otherwise
 #' @export
+#' @family Issues
 #'
 gh_issue_mention <- function(path, collaborator, ...) {
 
@@ -110,6 +114,7 @@ gh_issue_mention <- function(path, collaborator, ...) {
 #'
 #' @return NA; called for side effects
 #' @export
+#' @family Issues
 #'
 gh_issue_assign <- function(path, issue_number, collaborator, ...) {
 

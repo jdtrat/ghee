@@ -19,3 +19,11 @@ TRUE if the collaborator was mentioned in any issues; FALSE otherwise
 \description{
 Check to see if a person was mentioned in a GitHub issue
 }
+\seealso{
+Other Issues: 
+\code{\link{gh_issue_assign}()},
+\code{\link{gh_issue_comment}()},
+\code{\link{gh_issue_list}()},
+\code{\link{gh_issue_new}()}
+}
+\concept{Issues}

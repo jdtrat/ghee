@@ -12,7 +12,7 @@ gh_repos_list(user, ...)
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
-Repositories for the specified user
+Repositories for the specified user.
 }
 \description{
 List a user's github repository
@@ -20,3 +20,11 @@ List a user's github repository
 \examples{
 gh_repos_list("jdtrat")
 }
+\seealso{
+Other Repositories: 
+\code{\link{gh_repos_create}()},
+\code{\link{gh_repos_delete_internal}()},
+\code{\link{gh_repos_delete}()},
+\code{\link{gh_repos_mutate}()}
+}
+\concept{Repositories}

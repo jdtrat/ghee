@@ -5,7 +5,9 @@
 #' @param private Will this repository be private? TRUE/FALSE; default is TRUE.
 #' @param description (Optional) A short description of the repository.
 #'
+#' @return NA; used for side effects to create a repository on GitHub.
 #' @export
+#' @family Repositories
 #'
 gh_repos_create <- function(path, private = TRUE, description = NULL, ...) {
 
@@ -28,7 +30,8 @@ gh_repos_create <- function(path, private = TRUE, description = NULL, ...) {
 #'
 #' @export
 #'
-#' @return Repositories for the specified user
+#' @return Repositories for the specified user.
+#' @family Repositories
 #' @examples
 #' gh_repos_list("jdtrat")
 
@@ -52,6 +55,9 @@ gh_repos_list <- function(user, ...) {
 #' @param repo GitHub repo
 #' @inheritParams gh_repos_create
 #'
+#' @return NA; used for side effects to delete a repository from GitHub.
+#' @family Repositories
+#'
 #' @keywords internal
 #'
 gh_repos_delete_internal <- function(owner, repo, ...) {
@@ -68,13 +74,16 @@ gh_repos_delete_internal <- function(owner, repo, ...) {
 
 #' Delete a GitHub repository
 #'
-#' \strong{Use with caution!} By default the github token created with `usethis`
+#' \strong{Use with caution!} By default the github token created with [usethis::create_github_token()]
 #' does not allow this functionality. You must create your own PAT that has the
 #' appropriate permissions to delete repositories.
 #'
 #' @inheritParams gh_repos_create
 #'
+#'
+#' @return NA; used for side effects to delete a repository from GitHub.
 #' @export
+#' @family Repositories
 #'
 gh_repos_delete <- function(path, ...) {
 
@@ -97,9 +106,9 @@ gh_repos_delete <- function(path, ...) {
 #'
 #' @inheritParams gh_repos_create
 #'
+#' @return NA; called for side effects to manipulate GitHub repositories.
 #' @export
-#'
-#' @return NA; called for side effects
+#' @family Repositories
 #'
 #' @examples
 #'

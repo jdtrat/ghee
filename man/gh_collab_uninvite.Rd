@@ -19,3 +19,12 @@ NA; called for side effects.
 \description{
 This only works if the individual's invite is pending.
 }
+\seealso{
+Other Collaborations: 
+\code{\link{gh_collab_check}()},
+\code{\link{gh_collab_invite}()},
+\code{\link{gh_collab_list}()},
+\code{\link{gh_collab_pending}()},
+\code{\link{gh_collab_remove}()}
+}
+\concept{Collaborations}

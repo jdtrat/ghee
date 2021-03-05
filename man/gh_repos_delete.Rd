@@ -11,8 +11,19 @@ gh_repos_delete(path, ...)
 
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
+\value{
+NA; used for side effects to delete a repository from GitHub.
+}
 \description{
-\strong{Use with caution!} By default the github token created with \code{usethis}
+\strong{Use with caution!} By default the github token created with \code{\link[usethis:github-token]{usethis::create_github_token()}}
 does not allow this functionality. You must create your own PAT that has the
 appropriate permissions to delete repositories.
 }
+\seealso{
+Other Repositories: 
+\code{\link{gh_repos_create}()},
+\code{\link{gh_repos_delete_internal}()},
+\code{\link{gh_repos_list}()},
+\code{\link{gh_repos_mutate}()}
+}
+\concept{Repositories}

@@ -12,7 +12,7 @@ gh_repos_mutate(path, ...)
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
-NA; called for side effects
+NA; called for side effects to manipulate GitHub repositories.
 }
 \description{
 This function allows you to update a repository's features. You can easily
@@ -52,3 +52,11 @@ gh_repos_delete("jdtrat/ghee_test")
 
 
 }
+\seealso{
+Other Repositories: 
+\code{\link{gh_repos_create}()},
+\code{\link{gh_repos_delete_internal}()},
+\code{\link{gh_repos_delete}()},
+\code{\link{gh_repos_list}()}
+}
+\concept{Repositories}

@@ -21,3 +21,11 @@ NA; called for side effects
 \description{
 Assign people to a GitHub issue
 }
+\seealso{
+Other Issues: 
+\code{\link{gh_issue_comment}()},
+\code{\link{gh_issue_list}()},
+\code{\link{gh_issue_mention}()},
+\code{\link{gh_issue_new}()}
+}
+\concept{Issues}

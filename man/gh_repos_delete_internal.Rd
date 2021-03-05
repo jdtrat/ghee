@@ -13,7 +13,18 @@ gh_repos_delete_internal(owner, repo, ...)
 
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
+\value{
+NA; used for side effects to delete a repository from GitHub.
+}
 \description{
 Actually delete repo
 }
+\seealso{
+Other Repositories: 
+\code{\link{gh_repos_create}()},
+\code{\link{gh_repos_delete}()},
+\code{\link{gh_repos_list}()},
+\code{\link{gh_repos_mutate}()}
+}
+\concept{Repositories}
 \keyword{internal}

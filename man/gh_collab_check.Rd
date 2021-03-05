@@ -21,3 +21,14 @@ TRUE if the individual is a collaborator on the repo; FALSE otherwise.
 \description{
 Check if a user is a collaborator
 }
+\seealso{
+\code{\link[=gh_collab_list]{gh_collab_list()}} for listing all current repository collaborators.
+
+Other Collaborations: 
+\code{\link{gh_collab_invite}()},
+\code{\link{gh_collab_list}()},
+\code{\link{gh_collab_pending}()},
+\code{\link{gh_collab_remove}()},
+\code{\link{gh_collab_uninvite}()}
+}
+\concept{Collaborations}

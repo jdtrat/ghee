@@ -18,3 +18,11 @@ gh_issue_new(path, title, body, ...)
 \description{
 Create an issue on a github repo
 }
+\seealso{
+Other Issues: 
+\code{\link{gh_issue_assign}()},
+\code{\link{gh_issue_comment}()},
+\code{\link{gh_issue_list}()},
+\code{\link{gh_issue_mention}()}
+}
+\concept{Issues}

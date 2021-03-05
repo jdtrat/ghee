@@ -17,3 +17,12 @@ A dataframe listing the usernames of pending invitees (or dataframe of length 0 
 \description{
 List pending invitations for a repo
 }
+\seealso{
+Other Collaborations: 
+\code{\link{gh_collab_check}()},
+\code{\link{gh_collab_invite}()},
+\code{\link{gh_collab_list}()},
+\code{\link{gh_collab_remove}()},
+\code{\link{gh_collab_uninvite}()}
+}
+\concept{Collaborations}

@@ -17,3 +17,11 @@ A list of issues for the specified GitHub repo
 \description{
 List issues for a GitHub Repo
 }
+\seealso{
+Other Issues: 
+\code{\link{gh_issue_assign}()},
+\code{\link{gh_issue_comment}()},
+\code{\link{gh_issue_mention}()},
+\code{\link{gh_issue_new}()}
+}
+\concept{Issues}

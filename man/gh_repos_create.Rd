@@ -15,6 +15,17 @@ gh_repos_create(path, private = TRUE, description = NULL, ...)
 
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
+\value{
+NA; used for side effects to create a repository on GitHub.
+}
 \description{
 Create a new repository
 }
+\seealso{
+Other Repositories: 
+\code{\link{gh_repos_delete_internal}()},
+\code{\link{gh_repos_delete}()},
+\code{\link{gh_repos_list}()},
+\code{\link{gh_repos_mutate}()}
+}
+\concept{Repositories}

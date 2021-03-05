@@ -16,3 +16,12 @@ gh_collab_invite(path, collaborator, ...)
 \description{
 Invite a collaborator to a GitHub repo
 }
+\seealso{
+Other Collaborations: 
+\code{\link{gh_collab_check}()},
+\code{\link{gh_collab_list}()},
+\code{\link{gh_collab_pending}()},
+\code{\link{gh_collab_remove}()},
+\code{\link{gh_collab_uninvite}()}
+}
+\concept{Collaborations}
