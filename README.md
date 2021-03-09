@@ -10,6 +10,8 @@
 
 ------------------------------------------------------------------------
 
+<img src="https://www.jdtrat.com/packages/ghee/resources/ghee_hex.png" width="328" height="378" align="right"/>
+
 {ghee} is a user-friendly wrapper for the [{gh}](https://gh.r-lib.org/) package that provides client access to GitHub's REST API for common tasks such as creating issues and inviting collaborators.
 
 ## Table of contents
@@ -75,7 +77,7 @@ library(ghee)
 
 ## Further Reading
 
-If you are looking for a more in-depth explanation of these functions, I encourage you to check out my [blog post introducing {ghee}](https://jdtrat.com/blog/projects/ghee/).
+If you are looking for a more in-depth explanation of these functions, I encourage you to check out my [blog post introducing {ghee}](https://www.jdtrat.com/blog/projects/ghee/).
 
 ## Feedback
 
