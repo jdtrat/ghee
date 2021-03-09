@@ -6,6 +6,8 @@
 #' @param body The issue's body text
 #' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
+#' @return NA; used for side effects to create a new issue on the specified GitHub repository.
+#'
 #' @export
 #' @family Issues
 #'

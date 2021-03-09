@@ -4,6 +4,8 @@
 #' @param collaborator The collaborator for whom to call this function.
 #' @param ... Additional parameters, see \url{https://docs.github.com/en/rest}
 #'
+#' @return NA; used for side effects to invite a collaborator to the specified GitHub repository.
+#'
 #' @export
 #' @family Collaborations
 
@@ -26,7 +28,7 @@ gh_collab_invite <- function(path, collaborator, ...) {
 #'
 #' @inheritParams gh_collab_invite
 #'
-#' @return NA; called for side effects.
+#' @return NA; called for side effects to uninvite a collaborator to the specified GitHub repository.
 #'
 #' @export
 #' @family Collaborations

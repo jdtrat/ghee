@@ -14,7 +14,7 @@ gh_collab_uninvite(path, collaborator, ...)
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
 \value{
-NA; called for side effects.
+NA; called for side effects to uninvite a collaborator to the specified GitHub repository.
 }
 \description{
 This only works if the individual's invite is pending.

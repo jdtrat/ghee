@@ -13,6 +13,9 @@ gh_collab_invite(path, collaborator, ...)
 
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
+\value{
+NA; used for side effects to invite a collaborator to the specified GitHub repository.
+}
 \description{
 Invite a collaborator to a GitHub repo
 }

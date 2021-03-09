@@ -15,6 +15,9 @@ gh_issue_new(path, title, body, ...)
 
 \item{...}{Additional parameters, see \url{https://docs.github.com/en/rest}}
 }
+\value{
+NA; used for side effects to create a new issue on the specified GitHub repository.
+}
 \description{
 Create an issue on a github repo
 }
