@@ -1,6 +1,6 @@
 Package: ghee
-Title: Provides a lightweight interface for 'GitHub' through R
-Version: 0.0.1
+Title: Provides a Lightweight Interface for 'GitHub' through R
+Version: 0.1.0
 Authors@R: 
     person(given = "Jonathan",
            family = "Trattner",
