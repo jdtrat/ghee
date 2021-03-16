@@ -6,6 +6,7 @@
 
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
+[![CRAN status](https://www.r-pkg.org/badges/version/ghee)](https://CRAN.R-project.org/package=ghee)
 <!-- badges: end -->
 
 ------------------------------------------------------------------------
