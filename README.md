@@ -27,14 +27,17 @@
 
 You can install the development version of {ghee} from GitHub and load it as follows:
 
+
 ``` {.r}
-# Install the development version from GitHub
+# Install released version from CRAN
+install.packages("ghee")
+
+# Or, install the development version from GitHub
 remotes::install_github("jdtrat/ghee")
 
 # Load package
 library(ghee)
 ```
-
 ## Getting Started
 
 {ghee} is **not** meant to be an exhaustive package, though I do hope it will help you interact with GitHub easier. By design, all functions begin with the prefix `gh_`, followed by categories of actions such as `collab` and `issue`. This allows you to take advantage of RStudio's auto-completion feature and quickly achieve your programming goals. Below are currently supported functions.
