@@ -9,7 +9,7 @@
 
 ------------------------------------------------------------------------
 
-<img src="https://www.jdtrat.com/packages/ghee/resources/ghee_hex.png" width="328" height="378" align="right"/>
+<img src="https://www.jdtrat.com/project/ghee/featured-hex.png" width="328" height="378" align="right"/>
 
 {ghee} is a user-friendly wrapper for the [{gh}](https://gh.r-lib.org/) package that provides client access to GitHub's REST API for common tasks such as creating issues and inviting collaborators.
 
