@@ -79,7 +79,7 @@ library(ghee)
 
 ## Further Reading
 
-If you are looking for a more in-depth explanation of these functions, I encourage you to check out my [blog post introducing {ghee}](https://www.jdtrat.com/blog/projects/ghee/).
+If you are looking for a more in-depth explanation of these functions, I encourage you to check out my [blog post introducing {ghee}](https://www.jdtrat.com/blog/ghee/).
 
 ## Feedback
 
