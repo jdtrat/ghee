@@ -13,13 +13,13 @@ gh_collab_invite <- function(path, collaborator, ...) {
 
   path <- check_path(path)
 
-  invisible(
-    gh::gh("PUT /repos/{owner}/{repo}/collaborators/{username}",
+  # invisible(
+  invite <- gh::gh("PUT /repos/{owner}/{repo}/collaborators/{username}",
            owner = path[1],
            repo = path[2],
            username = collaborator,
            ...)
-  )
+  # )
 }
 
 #' Uninvite a collaborator to a GitHub repo
@@ -51,12 +51,12 @@ gh_collab_uninvite <- function(path, collaborator, ...) {
   pending <- cbind(ids, users)
   invite_id <- pending[pending$usernames == collaborator, "ids"]
 
-  invisible(
-    gh::gh("DELETE /repos/{owner}/{repo}/invitations/{invitation_id}",
+  # invisible(
+  uninvite <- gh::gh("DELETE /repos/{owner}/{repo}/invitations/{invitation_id}",
            owner = path[1],
            repo = path[2],
            invitation_id = invite_id)
-  )
+  # )
 
 }
 
