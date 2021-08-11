@@ -28,7 +28,7 @@
 You can install the development version of {ghee} from GitHub and load it as follows:
 
 
-``` {.r}
+```r
 # Install released version from CRAN
 install.packages("ghee")
 

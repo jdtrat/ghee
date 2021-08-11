@@ -1,0 +1,95 @@
+destination: docs
+
+url: https://ghee.jdtrat.com
+repo:
+    home: https://github.com/jdtrat/ghee/
+    source: https://github.com/jdtrat/ghee/blob/master/
+    issue: https://github.com/jdtrat/ghee/issues/
+    user: https://github.com/jdtrat/
+
+template:
+  package: jdtdown
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "ghee package"
+    twitter:
+      creator: "@jdtrat"
+      card: summary
+
+authors:
+  Jonathan Trattner:
+    href: "https://jdtrat.com"
+
+development:
+  mode: auto
+
+home:
+  strip_header: true
+  links:
+  - text: Learn more
+    href: ""
+
+# structure of website themed with jdtdown
+# based on structure of jdtdown
+navbar:
+  title: ~
+  type: default
+  structure:
+    left:  [intro, examples, articles]
+    right: [reference, news, github]
+  components:
+    home:
+    articles:
+      text: Articles
+      menu:
+        - text: "No Articles"
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/jdtrat/ghee
+    news:
+      text: News
+      menu:
+        - text: "Changelog"
+          href: news/index.html
+        - text: "------------------"
+        - text: "Blog posts"
+        # Add blog post where a released version is mentioned.
+        - text: Version 0.1.0
+          href: https://jdtrat.com/blog/ghee/
+reference:
+- title: Repositories
+  desc: >
+    Utility functions for working with GitHub Repositories.
+  contents:
+    - gh_repos_create
+    - gh_repos_delete
+    - gh_repos_mutate
+    - gh_repos_list
+- title: Issues
+  desc: >
+    Utility functions for working with GitHub Issues.
+  contents:
+    - gh_issue_new
+    - gh_issue_comment
+    - gh_issue_assign
+    - gh_issue_mention
+    - gh_issue_list
+- title: Collaboration
+  desc: >
+    Utility functions for collaborating with people via GitHub.
+  contents:
+    - gh_collab_check
+    - gh_collab_invite
+    - gh_collab_uninvite
+    - gh_collab_pending
+    - gh_collab_remove
+    - gh_collab_list
+- title: Miscellaneous
+  desc: >
+    Utility functions for miscellaneous activities involving GitHub.
+  contents:
+    - gh_get_clone_url

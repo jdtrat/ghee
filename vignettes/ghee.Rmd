@@ -1,0 +1,128 @@
+---
+title: "Getting Started with ghee"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with ghee}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## What is {ghee}?
+
+> {ghee} is a user-friendly wrapper for the {gh} package that provides client access to Github's REST API for common tasks such as creating issues and inviting collaborators.
+
+This package is **not** meant to replace {gh} or be an exhaustive API interface. It is designed to help you achieve common tasks with GitHub easily. As such, all functions begin with the prefix `gh_`, followed by categories of actions such as `collab` and `issue`. This allows you to take advantage of RStudio's auto-completion feature and quickly accomplish your goals.
+
+This vignette is a semi-pared down version of the blog post announcing {ghee}, which can be found on my [website](https://jdtrat.com/).
+
+## How do you install {ghee}?
+
+You can install {ghee} via CRAN or GitHub and load it as follows:
+
+``` {r, eval = FALSE}
+# Install released version from CRAN
+install.packages("ghee")
+
+# Or, install the development version from GitHub
+remotes::install_github("jdtrat/ghee")
+
+# Load package
+library(ghee)
+```
+
+## What are use cases for {ghee}?
+
+### Collaboration
+
+I've found it particularly helpful to use {ghee} when working with collaborators. Normally, to invite someone to a repo, I would have to navigate to its page on Github, go to settings, manage access, and send an invitation manually. With {ghee}, though, it's as simple as specifying the repo and the invitee:
+
+```{r gh_collab_invite-individual, eval = FALSE}
+gh_collab_invite(path = "owner/repository",
+                 invitee = "bestfriend")
+```
+
+If you wanted to invite multiple friends at once, you could do so in a functional programming style. Here's an example with the [{purrr}](http://purrr.tidyverse.org/) package, which simply calls the `gh_collab_invite()` for each entry in the friends vector.
+
+```{r gh_collab_invite-multiple, eval = FALSE}
+friends <- c("friend", "pal", "amigo")
+purrr::walk(.x = friends, 
+            ~ gh_collab_invite(path = "owner/repository", invitee = .x))
+```
+
+### Repositories
+
+{ghee} provides functions to create, edit, and delete repositories. As an example, I'll create a repo called "ghee_test," as seen below.
+
+```{r gh_repos_create, eval = FALSE}
+# Create a Private Repo
+gh_repos_create(path = "jdtrat/ghee_test", private = TRUE, description = "A test repository.")
+```
+
+![](ghee-images/ghee_test_create.png)
+
+Note how the above picture shows an "Issues" tab. I don't really want feedback on this repository, so I'm going to disable it with the `gh_repos_mutate()` function.
+
+```{r gh_repos_mutate-issues, eval = FALSE}
+# Disable Issues
+gh_repos_mutate(path = "jdtrat/ghee_test", has_issues = FALSE)
+```
+
+![](ghee-images/ghee_test_mutate_issues.png)
+
+If you decide you don't want a private repo anymore, no problem! That's an easy change! In the picture below, you can see the private badge next to the title is gone.
+
+```{r gh_repos_mutate-private, eval = FALSE}
+# Change Privacy Settings
+gh_repos_mutate(path = "jdtrat/ghee_test", private = FALSE)
+```
+
+![](ghee-images/ghee_test_mutate_privacy.png)
+
+Now, I know what you're thinking. You don't like the repo name "ghee_test." I don't blame you. Let's change it! Voila! It's now "ghee_testing."
+
+```{r gh_repos_mutate-name, eval = FALSE}
+# Change Repo Name
+gh_repos_mutate(path = "jdtrat/ghee_test", name = "ghee_testing")
+```
+
+![](ghee-images/ghee_test_mutate_name.png)
+
+For more repository manipulation options, check out GitHub's API [here](https://docs.github.com/en/rest/reference/repos#update-a-repository). You can also look at the documentation for `gh_repos_mutate()`, which expands upon the above examples.
+
+{ghee} also has a function to delete repositories, though it should be *used with caution*, as it is [**permanent**]{.ul}. Further, if you want to use it, you will need to create a special GitHub PAT with the [appropriate permissions](https://docs.github.com/en/github/administering-a-repository/deleting-a-repository). This can be done with the with the [{usethis}](http://usethis.r-lib.org) package as follows: `usethis::create_github_token(scopes = "delete_repo")`.
+
+### Issues
+
+Another big component of GitHub are Issues. {ghee} includes some helper functions for interacting with them. These include, `gh_issue_list()`, `gh_issue_new()`, `gh_issue_comment()`, and `gh_issue_assign()`. The first function, perhaps unsurprisingly, lists the GitHub issues for a specific repo. The next one allows you to create a new issue, and the other two allow you to comment on or assign existing ones. For example, if I wanted to create an issue for my [{shinysurveys}](https://github.com/jdtrat/shinysurveys) package, I could do so as follows:
+
+```{r gh_issues_new, eval = FALSE}
+gh_issue_new(path = "jdtrat/shinysurveys", 
+             title = "My Issue Title", 
+             body = "Just wanted to pop on and say I love your package!")
+
+```
+
+To assign that issue to myself, or respond to it, I would use the issue number (which I could get with `gh_issue_list()`) and do something like this:
+
+```{r gh_issues_extra, eval = FALSE}
+gh_issue_assign(path = "jdtrat/shinysurveys",
+                issue_number = 5, 
+                assignees = "jdtrat")
+
+gh_issue_comment(path = "jdtrat/shinysurveys", 
+                 issue_number = 5, 
+                 body = "Thanks, @jdtrat!")
+```
+
+## Happy Git(Hub)ing!
+
+Thanks for reading this vignette. The material covered here is also posted on my [blog with some background on the inspiration for ghee](https://jdtrat.com/blog/ghee). 
+
+I hope you find use for {ghee} in your day-to-day. If you have any feedback, I'd love for you to file an issue (bonus points if you use `gh_issue_new()`!). For more of my work, check out my [GitHub](https://github.com/jdtrat)! If you want to chat about anything (including neuroscience, \#rstats, piano, or my cat Tucker), DM me on [Twitter](https://twitter.com/jdtrat)! 
